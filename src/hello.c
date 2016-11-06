@@ -1,10 +1,10 @@
 /**
- * Linux-Kernel-Module-Template
+ * linux-kernel-module-template
  *
  * Copyright (c) 2016 ngtkt0909
  *
  * Released under the MIT License.
- * https://github.com/ngtkt0909/Linux-Kernel-Module-Template/blob/master/LICENSE
+ * https://github.com/ngtkt0909/linux-kernel-module-template/blob/master/LICENSE
  */
 
 #include <linux/module.h>

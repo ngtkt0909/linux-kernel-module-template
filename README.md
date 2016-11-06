@@ -1,4 +1,4 @@
-# Linux-Kernel-Module-Template
+# linux-kernel-module-template
 
 ## Overview
 **Template for Linux kernel module**.
@@ -44,7 +44,7 @@ If want to remove, Unload the kernel module.
 ```
 
 ## License
-[MIT](https://github.com/ngtkt0909/Linux-Kernel-Module-Template/blob/develop/LICENSE)
+[MIT](https://github.com/ngtkt0909/linux-kernel-module-template/blob/develop/LICENSE)
 
 ## Author
 [ngtkt0909](https://github.com/ngtkt0909)
