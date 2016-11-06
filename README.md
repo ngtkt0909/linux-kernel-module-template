@@ -47,4 +47,4 @@ If want to remove, Unload the kernel module.
 [MIT](https://github.com/ngtkt0909/linux-kernel-module-template/blob/develop/LICENSE)
 
 ## Author
-[ngtkt0909](https://github.com/ngtkt0909)
+[T. Ngtk](https://github.com/ngtkt0909)

@@ -1,7 +1,7 @@
 /**
  * linux-kernel-module-template
  *
- * Copyright (c) 2016 ngtkt0909
+ * Copyright (c) 2016 T. Ngtk
  *
  * Released under the MIT License.
  * https://github.com/ngtkt0909/linux-kernel-module-template/blob/master/LICENSE
@@ -10,7 +10,7 @@
 #include <linux/module.h>
 #include <linux/init.h>
 
-MODULE_AUTHOR("ngtkt0909");
+MODULE_AUTHOR("T. Ngtk");
 MODULE_LICENSE("MIT");
 
 static int hello_value;
