@@ -1,14 +1,29 @@
 # Linux-Kernel-Module-Template
 
-## 概要
-Linuxカーネルモジュールのテンプレート。
-モジュールのロード/アンロード時に，
-カーネルのメッセージバッファに文字列を出力する。
+## Overview
+**Template for Linux kernel module**.
+Print a message to kernel's message buffer (see to run command: `dmesg`)
+when a module is loaded/unloaded.
 
-## 使用方法
+## How to use
+###
+Download **linux-headers** (change version according to the latest version):
+```shell
+	$ sudo apt-get install linux-headers-3.13.0-100-generic
+```
 
-1. Linuxヘッダをダウンロード（sudo apt-get install linux-headers-3.13.0-100-generic）
-1. Makefileの先頭行をダウンロード先に合わせて変更
-1. makeを実行
-1. モジュールをロード（sudo insmod hello.ko） 
-1. モジュールをアンロード（sudo rmmod hello）
+Change first line of Makefile (**KPATHP**) according to installed **linux-headers** version and path.
+
+Make a kernel module (hello.ko):
+```shell
+	$ make
+```
+Load the kernel module.
+```shell
+	$ sudo insmod hello.ko
+```
+
+If want to remove, Unload the kernel module.
+```shell
+	$ sudo rmmod hello
+```
