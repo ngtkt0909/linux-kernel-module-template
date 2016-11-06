@@ -5,7 +5,7 @@
 Print a message to kernel's message buffer (see to run command: `dmesg`)
 when a module is loaded/unloaded.
 
-## How to use
+## Usage
 Download **linux-headers** (change version according to the latest version):
 ```shell
 	$ sudo apt-get install linux-headers-3.13.0-100-generic
