@@ -5,7 +5,12 @@
 Print a message to kernel's message buffer (see to run command: `dmesg`)
 when a module is loaded/unloaded.
 
-## Usage
+## Install
+Install development environment:
+```shell
+	$ sudo apt-get install build-essential
+```
+
 Download **linux-headers** (change version according to the latest version):
 ```shell
 	$ sudo apt-get install linux-headers-3.13.0-100-generic
@@ -17,9 +22,20 @@ Make a kernel module (hello.ko):
 ```shell
 	$ make
 ```
+## Usage
 Load the kernel module.
 ```shell
 	$ sudo insmod hello.ko
+```
+
+Can see the loaded kernel module:
+```shell
+	$ lsmod | grep hello
+```
+
+Can see exported valiable:
+```shell
+	$ cat /sys/module/hello/parameters/hello_value
 ```
 
 If want to remove, Unload the kernel module.
