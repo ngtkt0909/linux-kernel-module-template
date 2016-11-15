@@ -16,7 +16,7 @@ Download **linux-headers** (change version according to the latest version):
 $ sudo apt-get install linux-headers-3.13.0-100-generic
 ```
 
-Change first line of Makefile (**KPATHP**) according to installed **linux-headers** version and path.
+Change first line of Makefile (**KPATH**) according to installed **linux-headers** version and path.
 
 Make a kernel module (hello.ko):
 ```shell
