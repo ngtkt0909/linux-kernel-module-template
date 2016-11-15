@@ -1,6 +1,6 @@
 KPATH := /usr/src/linux-headers-3.13.0-100-generic
 
-obj-m := hello.o
+obj-m := ./src/hello.o
 
 all:
 	make -C $(KPATH) M=$(PWD) modules
