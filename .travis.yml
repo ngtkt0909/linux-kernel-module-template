@@ -1,0 +1,12 @@
+language: c
+sudo: false
+addons:
+  apt:
+    packages:
+      - doxygen
+      - graphviz
+script:
+  - make doc
+notifications:
+  on_success: never
+  on_failure: never
