@@ -1,5 +1,11 @@
 # linux-kernel-module-template
 
+* master:  
+[![Build Status](https://travis-ci.org/ngtkt0909/linux-kernel-module-template.svg?branch=master)](https://travis-ci.org/ngtkt0909/linux-kernel-module-template)
+
+* develop:  
+[![Build Status](https://travis-ci.org/ngtkt0909/linux-kernel-module-template.svg?branch=develop)](https://travis-ci.org/ngtkt0909/linux-kernel-module-template)
+
 ## Overview
 **Template for Linux kernel module**.
 Print a message to kernel's message buffer
