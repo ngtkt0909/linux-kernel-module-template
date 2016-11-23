@@ -5,8 +5,14 @@ CROSS_COMPILE := $(TPATH)/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x6
 
 obj-m := ./src/hello.o
 
+.PHONY: all clean doc
+
 all:
 	make -C $(KPATH) M=$(PWD) modules ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
 
 clean:
 	make -C $(KPATH) M=$(PWD) clean
+	rm -rf ./doc
+
+doc:
+	doxygen ./Doxyfile
