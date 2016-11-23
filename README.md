@@ -2,7 +2,8 @@
 
 ## Overview
 **Template for Linux kernel module**.
-Print a message to kernel's message buffer when a module is loaded/unloaded.
+Print a message to kernel's message buffer
+on the module loaded/unloaded, open()/close(), write()/read().
 In order to see the message, run command: `dmesg`.
 
 ## Install
@@ -48,7 +49,7 @@ $ make -f Makefile.raspberrypi
 ```
 
 ## Usage
-Load the kernel module.
+Load the kernel module:
 ```shell
 $ sudo insmod hello.ko
 ```
@@ -60,10 +61,11 @@ $ lsmod | grep hello
 
 Can see exported valiable:
 ```shell
-$ cat /sys/module/hello/parameters/hello_value
+$ cat /sys/module/hello/parameters/g_dev_major
+$ cat /sys/module/hello/parameters/g_dev_minor
 ```
 
-If want to remove, Unload the kernel module.
+Unload the kernel module:
 ```shell
 $ sudo rmmod hello
 ```
