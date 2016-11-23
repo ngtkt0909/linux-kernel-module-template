@@ -69,7 +69,8 @@ $ sudo rmmod hello
 ```
 
 ## License
-[MIT](https://github.com/ngtkt0909/linux-kernel-module-template/blob/master/LICENSE)
+[MIT](https://github.com/ngtkt0909/linux-kernel-module-template/blob/master/LICENSE-MIT) and
+[GPL](https://github.com/ngtkt0909/linux-kernel-module-template/blob/master/LICENSE-GPL)
 
 ## Author
 [T. Ngtk](https://github.com/ngtkt0909)
