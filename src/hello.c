@@ -6,9 +6,9 @@
  * @copyright	Copyright (c) 2016 T. Ngtk
  *
  * @par License
- *	Released under the MIT and GPL Licenses.<BR>
- *	https://github.com/ngtkt0909/raspberry-pi-gpio/blob/master/LICENSE-MIT<BR>
- *	https://github.com/ngtkt0909/raspberry-pi-gpio/blob/master/LICENSE-GPL
+ *	Released under the MIT and GPL Licenses.
+ *	- https://github.com/ngtkt0909/raspberry-pi-gpio/blob/master/LICENSE-MIT
+ *	- https://github.com/ngtkt0909/raspberry-pi-gpio/blob/master/LICENSE-GPL
  */
 
 #include <linux/module.h>	/* MODULE_*, module_* */
@@ -34,29 +34,30 @@ static void sUnregisterDev(void);
 /*------------------------------------------------------------------------------
 	Defined Macros
 ------------------------------------------------------------------------------*/
-#define D_DEV_NAME		"hello"
-#define D_DEV_MAJOR		(0)
-#define D_DEV_MINOR		(0)
-#define D_DEV_NUM		(3)
-#define D_BUF_SIZE		(32)
+#define D_DEV_NAME		"hello"				/**< device name */
+#define D_DEV_MAJOR		(0)					/**< major# */
+#define D_DEV_MINOR		(0)					/**< minor# */
+#define D_DEV_NUM		(3)					/**< number of device */
+#define D_BUF_SIZE		(32)				/**< buffer size (for sample-code) */
 
 /*------------------------------------------------------------------------------
 	Type Definition
 ------------------------------------------------------------------------------*/
-/** @brief  */
+/** @brief private data */
 typedef struct t_private_data {
-	int minor;			/**< minor# */
+	int minor;								/**< minor# */
 } T_PRIVATE_DATA;
 
 /*------------------------------------------------------------------------------
 	Global Variables
 ------------------------------------------------------------------------------*/
-static struct class *g_class;
-static struct cdev *g_cdev_array;
-static int g_dev_major = D_DEV_MAJOR;
-static int g_dev_minor = D_DEV_MINOR;
-static int g_buf[D_DEV_NUM][D_BUF_SIZE];
+static struct class *g_class;				/**< device class */
+static struct cdev *g_cdev_array;			/**< charactor devices */
+static int g_dev_major = D_DEV_MAJOR;		/**< major# */
+static int g_dev_minor = D_DEV_MINOR;		/**< minor# */
+static int g_buf[D_DEV_NUM][D_BUF_SIZE];	/**< buffer (for sample-code) */
 
+/** file operations */
 static struct file_operations g_fops = {
 	.open    = helloOpen,
 	.release = helloRelease,
@@ -120,8 +121,8 @@ static void helloExit(void)
 /**
  * @brief Kernel Module Open : open()
  *
- * @param [in]	inode	
- * @param [in]	filep	
+ * @param [in]		inode	inode structure
+ * @param [in,out]	filep	file structure
  *
  * @retval 0		success
  * @retval others	failure
@@ -145,8 +146,8 @@ static int helloOpen(struct inode *inode, struct file *filep)
 /**
  * @brief Kernel Module Release : close()
  *
- * @param [in]	inode	
- * @param [in]	filep	
+ * @param [in]	inode	inode structure
+ * @param [in]	filep	file structure
  *
  * @retval 0		success
  * @retval others	failure
@@ -166,10 +167,10 @@ static int helloRelease(struct inode *inode, struct file *filep)
 /**
  * @brief Kernel Module Write : write()
  *
- * @param [in]	filep	
- * @param [in]	buf		
- * @param [in]	count	
- * @param [in]	f_pos	
+ * @param [in]		filep	file structure
+ * @param [in]		buf		buffer address (user)
+ * @param [in]		count	write data size
+ * @param [in,out]	f_pos	file position
  *
  * @return	number of write byte
  */
@@ -194,10 +195,10 @@ static ssize_t helloWrite(struct file *filep, const char __user *buf, size_t cou
 /**
  * @brief Kernel Module Read : read()
  *
- * @param [in]	filep	
- * @param [in]	buf		
- * @param [in]	count	
- * @param [in]	f_pos	
+ * @param [in]		filep	file structure
+ * @param [out]		buf		buffer address (user)
+ * @param [in]		count	read data size
+ * @param [in,out]	f_pos	file position
  *
  * @return	number of read byte
  */
@@ -250,18 +251,20 @@ static int sRegisterDev(void)
 		return PTR_ERR(g_class);
 	}
 
-	/* allocate cdev */
+	/* allocate charactor devices */
 	g_cdev_array = (struct cdev *)kmalloc(sizeof(struct cdev) * D_DEV_NUM, GFP_KERNEL);
 
-	/* register devices */
 	for (i = 0; i < D_DEV_NUM; i++) {
 		dev_tmp = MKDEV(g_dev_major, g_dev_minor + i);
+		/* initialize charactor devices */
 		cdev_init(&g_cdev_array[i], &g_fops);
 		g_cdev_array[i].owner = THIS_MODULE;
+		/* register charactor devices */
 		if (cdev_add(&g_cdev_array[i], dev_tmp, 1) < 0) {
 			printk(KERN_ERR "cdev_add() failed: minor# = %d\n", g_dev_minor + i);
 			continue;
 		}
+		/* create device node */
 		device_create(g_class, NULL, dev_tmp, NULL, D_DEV_NAME "%u", g_dev_minor + i);
 	}
 
@@ -269,7 +272,7 @@ static int sRegisterDev(void)
 }
 
 /**
- * @brief Register Devices
+ * @brief Unregister Devices
  *
  * @param nothing
  *
@@ -280,10 +283,11 @@ static void sUnregisterDev(void)
 	dev_t dev_tmp;
 	int i;
 
-	/* unregister devices */
 	for (i = 0; i < D_DEV_NUM; i++) {
-		cdev_del(&g_cdev_array[i]);
 		dev_tmp = MKDEV(g_dev_major, g_dev_minor + i);
+		/* delete charactor devices */
+		cdev_del(&g_cdev_array[i]);
+		/* destroy device node */
 		device_destroy(g_class, dev_tmp);
 	}
 
@@ -291,9 +295,9 @@ static void sUnregisterDev(void)
 	dev_tmp = MKDEV(g_dev_major, g_dev_minor);
 	unregister_chrdev_region(dev_tmp, D_DEV_NUM);
 
-	/* destroy devoce class */
+	/* destroy device class */
 	class_destroy(g_class);
 
-	/* deallocate cdev */
+	/* deallocate charactor device */
 	kfree(g_cdev_array);
 }
