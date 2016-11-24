@@ -37,7 +37,20 @@ Install development environment:
 $ sudo apt-get install build-essential git
 ```
 
-Build cross compilation environment (For details, refer to [Raspberry Pi](https://www.raspberrypi.org/documentation/linux/kernel/building.md "link to KERNEL BUILDING")):
+Build cross compilation environment.
+(refer to the [official documentation](https://www.raspberrypi.org/documentation/linux/kernel/building.md "link to KERNEL BUILDING") for details)
+
+On 32bit Linux:
+```shell
+$ git clone --depth=1 https://github.com/raspberrypi/linux
+$ git clone --depth=1 https://github.com/raspberrypi/tools
+$ cd linux
+$ KERNEL=kernel7
+$ make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf- bcm2709_defconfig
+$ make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf- zImage modules dtbs
+```
+
+On 64bit Linux:
 ```shell
 $ git clone --depth=1 https://github.com/raspberrypi/linux
 $ git clone --depth=1 https://github.com/raspberrypi/tools
