@@ -7,7 +7,7 @@ addons:
       - doxygen
       - graphviz
 before_install:
-  - sudo apt-get install -y linux-headers-`uname-r`
+  - sudo apt-get install -y linux-headers-`uname -r`
 script:
   - make
   - make doc
