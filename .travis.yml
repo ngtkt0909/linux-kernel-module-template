@@ -1,13 +1,12 @@
 language: c
-sudo: true
+sudo: false
 addons:
   apt:
     packages:
       - build-essential
+      - linux-headers-`uname -r`
       - doxygen
       - graphviz
-before_install:
-  - sudo apt-get install -y linux-headers-`uname -r`
 script:
   - make
   - make doc
