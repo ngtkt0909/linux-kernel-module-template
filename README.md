@@ -10,10 +10,9 @@
 **Template for Linux kernel module**.
 Print a message to kernel's message buffer
 on the module loaded/unloaded, open()/close(), write()/read().
-In order to see the message, run command: `dmesg`.
 
 ## Install
-### Self Compiling
+### Self Compiling (for Ubuntu, etc)
 Install development environment:
 ```shell
 $ sudo apt-get install build-essential
