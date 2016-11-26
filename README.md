@@ -19,12 +19,10 @@ Install development environment:
 $ sudo apt-get install build-essential
 ```
 
-Download **linux-headers** (change version according to the latest version):
+Download **linux-headers**:
 ```shell
-$ sudo apt-get install linux-headers-3.13.0-100-generic
+$ sudo apt-get install linux-headers-`uname -r`
 ```
-
-Change first line of Makefile (**KPATH**) according to installed **linux-headers** version and path.
 
 Make a kernel module (./src/hello.ko):
 ```shell
@@ -60,7 +58,7 @@ $ make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabih
 $ make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf- zImage modules dtbs
 ```
 
-Change first and second lines of Makefile.raspberrypi (**KPATH**, **TPATH**) according to download path on previous step.
+Change first and second lines of Makefile.raspberrypi (**KPATH**, **TPATH**) according to download path on the previous step.
 
 Make a kernel module (./src/hello.ko):
 ```shell
