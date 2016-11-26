@@ -35,8 +35,8 @@ Install development environment:
 $ sudo apt-get install build-essential git
 ```
 
-Build cross compilation environment.
-(refer to the [official documentation](https://www.raspberrypi.org/documentation/linux/kernel/building.md "link to KERNEL BUILDING") for details)
+Build cross compilation environment
+(refer to the [official documentation](https://www.raspberrypi.org/documentation/linux/kernel/building.md "link to KERNEL BUILDING") for details).
 
 On 32bit Linux:
 ```shell
