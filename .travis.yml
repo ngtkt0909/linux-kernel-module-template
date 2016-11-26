@@ -3,10 +3,14 @@ sudo: false
 addons:
   apt:
     packages:
+      - build-essential
+      - linux-headers-`uname-r`
       - doxygen
       - graphviz
 script:
+  - make
   - make doc
+  - make clean
 notifications:
   on_success: never
   on_failure: never

@@ -1,4 +1,4 @@
-KPATH := /usr/src/linux-headers-3.13.0-100-generic
+KPATH := /usr/src/linux-headers-`uname -r`
 
 obj-m := ./src/hello.o
 
