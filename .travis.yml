@@ -10,9 +10,9 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y linux-headers-`uname -r`
 script:
-  - make
-  - make doc
-  - make clean
+  - make -C 00.hello
+  - make -C 00.hello doc
+  - make -C 00.hello clean
 notifications:
   on_success: never
   on_failure: never

@@ -8,10 +8,10 @@ obj-m := ./src/hello.o
 .PHONY: all clean doc
 
 all:
-	make -C $(KPATH) M=$(PWD) modules ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
+	make -C $(KPATH) M=$(CURDIR) modules ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
 
 clean:
-	make -C $(KPATH) M=$(PWD) clean
+	make -C $(KPATH) M=$(CURDIR) clean
 	rm -rf ./doc
 
 doc:

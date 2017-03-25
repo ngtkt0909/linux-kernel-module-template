@@ -5,10 +5,10 @@ obj-m := ./src/hello.o
 .PHONY: all clean doc
 
 all:
-	make -C $(KPATH) M=$(PWD) modules
+	make -C $(KPATH) M=$(CURDIR) modules
 
 clean:
-	make -C $(KPATH) M=$(PWD) clean
+	make -C $(KPATH) M=$(CURDIR) clean
 	rm -rf ./doc
 
 doc:

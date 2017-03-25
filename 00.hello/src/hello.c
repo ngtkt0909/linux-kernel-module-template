@@ -7,8 +7,8 @@
  *
  * @par License
  *	Released under the MIT and GPL Licenses.
- *	- https://github.com/ngtkt0909/raspberry-pi-gpio/blob/master/LICENSE-MIT
- *	- https://github.com/ngtkt0909/raspberry-pi-gpio/blob/master/LICENSE-GPL
+ *	- https://github.com/ngtkt0909/linux-kernel-module-template/blob/master/LICENSE-MIT
+ *	- https://github.com/ngtkt0909/linux-kernel-module-template/blob/master/LICENSE-GPL
  */
 
 #include <linux/module.h>	/* MODULE_*, module_* */
