@@ -12,6 +12,11 @@
 Print a message to kernel's message buffer
 on the module loaded/unloaded, open()/close(), write()/read().
 
+### 01.ktimer
+**Kernel Timer Template**.
+Timer handler using kernel timer is periodically executed, and
+it increments counter every 100ms.
+
 ## Install
 ### Self Compiling (for Ubuntu, etc)
 Download **linux-headers**:
@@ -76,6 +81,27 @@ $ cat /sys/module/hello/parameters/g_dev_minor
 Unload the kernel module:
 ```shell
 $ sudo rmmod hello
+```
+
+### 01.ktimer
+Load the kernel module:
+```shell
+$ sudo insmod ktimer.ko
+```
+
+Can see the loaded kernel module:
+```shell
+$ lsmod | grep ktimer
+```
+
+Can see exported valiable:
+```shell
+$ cat /sys/module/ktimer/parameters/g_counter
+```
+
+Unload the kernel module:
+```shell
+$ sudo rmmod ktimer
 ```
 
 ## License
