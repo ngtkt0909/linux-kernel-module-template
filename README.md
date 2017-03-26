@@ -7,17 +7,13 @@
 [![Build Status](https://travis-ci.org/ngtkt0909/linux-kernel-module-template.svg?branch=develop)](https://travis-ci.org/ngtkt0909/linux-kernel-module-template)
 
 ## Overview
-**Template for Linux kernel module**.
+### 00.hello
+**Hello World of linux kernel module**.
 Print a message to kernel's message buffer
 on the module loaded/unloaded, open()/close(), write()/read().
 
 ## Install
 ### Self Compiling (for Ubuntu, etc)
-Install development environment:
-```shell
-$ sudo apt-get install build-essential
-```
-
 Download **linux-headers**:
 ```shell
 $ sudo apt-get install linux-headers-`uname -r`
@@ -29,11 +25,6 @@ $ make
 ```
 
 ### Cross Compiling (for Raspberry Pi)
-Install development environment:
-```shell
-$ sudo apt-get install build-essential git
-```
-
 Build cross compilation environment
 (refer to the [official documentation](https://www.raspberrypi.org/documentation/linux/kernel/building.md "link to KERNEL BUILDING") for details).
 
@@ -65,6 +56,7 @@ $ make -f Makefile.raspberrypi
 ```
 
 ## Usage
+### 00.hello
 Load the kernel module:
 ```shell
 $ sudo insmod hello.ko
