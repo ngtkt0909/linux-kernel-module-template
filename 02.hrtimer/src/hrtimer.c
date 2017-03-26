@@ -29,7 +29,7 @@ static enum hrtimer_restart timer_handler(struct hrtimer *timer);
 	Defined Macros
 ------------------------------------------------------------------------------*/
 #define D_DEV_NAME	"02.hrtimer"				/**< device name */
-#define D_PERIOD	(100000)					/**< period of timer handler [ns] */
+#define D_PERIOD	(100000000)					/**< period of timer handler [ns] */
 #define D_KTIME		ktime_set(0, D_PERIOD)		/**< period of timer handler (ktime) */
 
 /*------------------------------------------------------------------------------
