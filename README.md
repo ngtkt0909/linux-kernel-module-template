@@ -17,6 +17,11 @@ on the module loaded/unloaded, open()/close(), write()/read().
 Timer handler using kernel timer is periodically executed, and
 it increments counter every 100ms.
 
+### 02.hrtimer
+**High-resolution Timer Template**.
+Timer handler using high-resolution timer is periodically executed, and
+it increments counter every 100ms.
+
 ## Install
 ### Self Compiling (for Ubuntu, etc)
 Download **linux-headers**:
@@ -102,6 +107,27 @@ $ cat /sys/module/ktimer/parameters/g_counter
 Unload the kernel module:
 ```shell
 $ sudo rmmod ktimer
+```
+
+### 02.hrtimer
+Load the kernel module:
+```shell
+$ sudo insmod hrtimer.ko
+```
+
+Can see the loaded kernel module:
+```shell
+$ lsmod | grep hrtimer
+```
+
+Can see exported valiable:
+```shell
+$ cat /sys/module/hrtimer/parameters/g_counter
+```
+
+Unload the kernel module:
+```shell
+$ sudo rmmod hrtimer
 ```
 
 ## License
