@@ -34,7 +34,7 @@ static void sTimerHandler(unsigned long data);
 	Global Variables
 ------------------------------------------------------------------------------*/
 static struct timer_list g_timer;		/**< timer_list structure */
-static uint32_t counter;
+static uint32_t g_counter;
 
 /*------------------------------------------------------------------------------
 	Macro Calls
@@ -45,7 +45,7 @@ MODULE_LICENSE("Dual MIT/GPL");
 module_init(ktimerInit);
 module_exit(ktimerExit);
 
-module_param(counter, int, S_IRUSR | S_IRGRP | S_IROTH);
+module_param(g_counter, int, S_IRUSR | S_IRGRP | S_IROTH);
 
 /*------------------------------------------------------------------------------
 	Functions (External)
@@ -139,7 +139,7 @@ static int sUnregisterTimer(struct timer_list *timer)
  */
 static void sTimerHandler(unsigned long data)
 {
-	counter++;
+	g_counter++;
 
 	/* register handler on kernel timer */
 	sRegisterTimer(&g_timer);
