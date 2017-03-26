@@ -3,7 +3,7 @@
  * @brief		Linux Kernel Module Template
  *
  * @author		T. Ngtk
- * @copyright	Copyright (c) 2016 T. Ngtk
+ * @copyright	Copyright (c) 2016-2017 T. Ngtk
  *
  * @par License
  *	Released under the MIT and GPL Licenses.
@@ -34,7 +34,7 @@ static void sUnregisterDev(void);
 /*------------------------------------------------------------------------------
 	Defined Macros
 ------------------------------------------------------------------------------*/
-#define D_DEV_NAME		"hello"				/**< device name */
+#define D_DEV_NAME		"00.hello"			/**< device name */
 #define D_DEV_MAJOR		(0)					/**< major# */
 #define D_DEV_MINOR		(0)					/**< minor# */
 #define D_DEV_NUM		(3)					/**< number of device */

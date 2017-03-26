@@ -1,5 +1,5 @@
 /**
- * @file		ktimer.c
+ * @file		hrtimer.c
  * @brief		Linux Kernel Module Template
  *
  * @author		T. Ngtk
@@ -12,28 +12,30 @@
  */
 
 #include <linux/module.h>	/* MODULE_*, module_* */
-#include <linux/timer.h>	/* init_timer(), add_timer(), del_timer_sync(), timer_list */
+#include <linux/hrtimer.h>	/* hrtimer_init(), hrtimer_start(), hrtimer_cancel(), hrtimer_forward() */
+#include <linux/ktime.h>	/* ktime_set(), ktime_get() */
 
 /*------------------------------------------------------------------------------
 	Prototype Declaration
 ------------------------------------------------------------------------------*/
-static int ktimerInit(void);
-static void ktimerExit(void);
+static int hrtimerInit(void);
+static void hrtimerExit(void);
 
-static int sRegisterTimer(struct timer_list *timer);
-static int sUnregisterTimer(struct timer_list *timer);
-static void sTimerHandler(unsigned long data);
+static int sRegisterTimer(struct hrtimer *timer);
+static int sUnregisterTimer(struct hrtimer *timer);
+static enum hrtimer_restart timer_handler(struct hrtimer *timer);
 
 /*------------------------------------------------------------------------------
 	Defined Macros
 ------------------------------------------------------------------------------*/
-#define D_DEV_NAME		"01.ktimer"		/**< device name */
-#define D_PERIOD		(100)			/**< period of timer handler [ms] */
+#define D_DEV_NAME	"02.hrtimer"				/**< device name */
+#define D_PERIOD	(100000)					/**< period of timer handler [ns] */
+#define D_KTIME		ktime_set(0, D_PERIOD)		/**< period of timer handler (ktime) */
 
 /*------------------------------------------------------------------------------
 	Global Variables
 ------------------------------------------------------------------------------*/
-static struct timer_list g_timer;		/**< timer_list structure */
+static struct hrtimer g_timer;					/**< hrtimer structure */
 static int g_counter;
 
 /*------------------------------------------------------------------------------
@@ -42,8 +44,8 @@ static int g_counter;
 MODULE_AUTHOR("T. Ngtk");
 MODULE_LICENSE("Dual MIT/GPL");
 
-module_init(ktimerInit);
-module_exit(ktimerExit);
+module_init(hrtimerInit);
+module_exit(hrtimerExit);
 
 module_param(g_counter, int, S_IRUSR | S_IRGRP | S_IROTH);
 
@@ -58,11 +60,11 @@ module_param(g_counter, int, S_IRUSR | S_IRGRP | S_IROTH);
  * @retval 0		success
  * @retval others	failure
  */
-static int ktimerInit(void)
+static int hrtimerInit(void)
 {
 	printk(KERN_INFO "%s loading ...\n", D_DEV_NAME);
 
-	/* register handler on kernel timer */
+	/* register handeler on hrtimer */
 	sRegisterTimer(&g_timer);
 
 	return 0;
@@ -75,11 +77,11 @@ static int ktimerInit(void)
  *
  * @retval nothing
  */
-static void ktimerExit(void)
+static void hrtimerExit(void)
 {
 	printk(KERN_INFO "%s unloading ...\n", D_DEV_NAME);
 
-	/* unregister handler from kernel timer */
+	/* unregister handler from hrtimer */
 	sUnregisterTimer(&g_timer);
 }
 
@@ -87,60 +89,62 @@ static void ktimerExit(void)
 	Functions (Internal)
 ------------------------------------------------------------------------------*/
 /**
- * @brief Kernel Timer Registration
+ * @brief High-resolution Timer Registration
  *
- * @param [in]		timer	timer_list structure
+ * @param [in]		timer	hrtimer structure
  *
  * @retval 0		success
  * @retval others	failure
  */
-static int sRegisterTimer(struct timer_list *timer)
+static int sRegisterTimer(struct hrtimer *timer)
 {
-	int expire_tick;
+	/* initialize hrtimer structure */
+	//hrtimer_init(timer, CLOCK_REALTIME, HRTIMER_MODE_REL);
+	hrtimer_init(timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+	timer->function = timer_handler;
 
-	/* initialize timer_list structure */
-	init_timer(timer);
-
-	expire_tick = HZ * D_PERIOD / 1000;
-	if (expire_tick == 0) {
-		expire_tick = 1;
-	}
-
-	timer->data = jiffies;					/* current jiffies */
-	timer->expires = jiffies + expire_tick;	/* executing handler jiffies */
-	timer->function = sTimerHandler;		/* pointer to handler */
-
-	/* register handler on kernel timer */
-	add_timer(timer);
+	/* start handler */
+	hrtimer_start(timer, D_KTIME, HRTIMER_MODE_REL);
 
 	return 0;
 }
 
 /**
- * @brief Kernel Timer Unregistration
+ * @brief High-resolution Timer Unregistration
  *
- * @param [in]		timer	timer_list structure
+ * @param [in]		timer	hrtimer structure
  *
  * @retval 0		success
  * @retval others	failure
  */
-static int sUnregisterTimer(struct timer_list *timer)
+static int sUnregisterTimer(struct hrtimer *timer)
 {
-	/* unregister handler from kernel timer */
-	return del_timer_sync(timer);
+	/* stop handler */
+	return hrtimer_cancel(timer);
 }
 
 /**
- * @brief Kernel Timer Handler
+ * @brief High-resolution Timer Handler
  *
- * @param [in]		data	current jiffies
+ * @param [in]		timer	hrtimer structure
  *
- * @retval nothing
+ * @retval HRTIMER_RESTART	repeat periodically execution
  */
-static void sTimerHandler(unsigned long data)
+static enum hrtimer_restart timer_handler(struct hrtimer *timer)
 {
+	ktime_t now;
+
+	/*  */
 	g_counter++;
 
-	/* register handler on kernel timer */
-	sRegisterTimer(&g_timer);
+	/* current time (case of using 'CLOCK_REALTIME') */
+	//now = hrtimer_cb_get_time(timer);
+	/* current time (case of using 'CLOCK_MONOTONIC') */
+	now = ktime_get();
+
+	/* forward timer */
+	hrtimer_forward(timer, now, D_KTIME);
+
+	/* restart handler execution */
+	return HRTIMER_RESTART;
 }
