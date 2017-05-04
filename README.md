@@ -60,7 +60,7 @@ $ make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabih
 
 Change first and second lines of Makefile.raspberrypi (**KPATH**, **TPATH**) according to download path on the previous step.
 
-Make a kernel module (./src/hello.ko):
+Make a kernel module:
 ```shell
 $ make -f Makefile.raspberrypi
 ```
