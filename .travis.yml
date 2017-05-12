@@ -9,7 +9,7 @@ addons:
       - graphviz
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y linux-headers-`uname -r`
+  - sudo apt-get install -y linux-headers-generic
 script:
   - make -C 00.hello   && make -C 00.hello   doc && make -C 00.hello   clean
   - make -C 01.ktimer  && make -C 01.ktimer  doc && make -C 01.ktimer  clean
