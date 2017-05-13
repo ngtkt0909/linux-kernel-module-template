@@ -9,7 +9,7 @@ all:
 
 clean:
 	make -C $(KPATH) M=$(CURDIR) clean
-	$(RM) ./doc
+	rm -rf ./doc
 
 doc:
 	doxygen ./Doxyfile

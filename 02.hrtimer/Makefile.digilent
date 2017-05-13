@@ -1,6 +1,6 @@
 KPATH := $(HOME)/digilent/Linux-Digilent-Dev
 ARCH := arm
-CROSS_COMPILE := /opt/Xilinx/SDK/2016.2/gnu/arm/lin/bin/arm-xilinx-linux-gnueabi-
+CROSS_COMPILE := arm-xilinx-linux-gnueabi-
 
 obj-m := ./src/hrtimer.o
 
@@ -11,7 +11,7 @@ all:
 
 clean:
 	make -C $(KPATH) M=$(CURDIR) clean
-	$(RM) ./doc
+	rm -rf ./doc
 
 doc:
 	doxygen ./Doxyfile

@@ -12,7 +12,7 @@ all:
 
 clean:
 	make -C $(KPATH) M=$(CURDIR) clean
-	$(RM) ./doc
+	rm -rf ./doc
 
 install:
 	mkdir -p /lib/modules/`uname -r`/misc
