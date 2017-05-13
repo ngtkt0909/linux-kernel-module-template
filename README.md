@@ -30,6 +30,10 @@ Example of L3GD20 3-axis gyro sensor.
 **SPI Client Driver Template**.
 Example of L3GD20 3-axis gyro sensor.
 
+### 05.iomemmap
+**I/O memory remap/unmap Template**.
+Monitor memory of specified physical address and display these values.
+
 ## Install
 ### Self Compiling (for Ubuntu, etc)
 Download **linux-headers**:
@@ -186,6 +190,27 @@ $ sudo make disconnect
 Remove the kernel module from the kernel directory, and update module information:
 ```shell
 $ sudo make uninstall
+```
+
+### 05.iomemmap
+Load the kernel module:
+```shell
+$ sudo insmod iomemmap.ko
+```
+
+Specify monitoring physical address and size with HEX-format (addr=0x41200000, size=0x8):
+```shell
+$ sudo echo 41200000,8 > /dev/05.iomemmap0
+```
+
+Can monitor these values:
+```shell
+$ sudo cat /dev/05.iomemmap0
+```
+
+Unload the kernel module:
+```shell
+$ sudo rmmod iomemmap
 ```
 
 ## License
