@@ -1,0 +1,17 @@
+KPATH := $(HOME)/digilent/Linux-Digilent-Dev
+ARCH := arm
+CROSS_COMPILE := arm-xilinx-linux-gnueabi-
+
+obj-m := ./src/iomemmap.o
+
+.PHONY: all clean doc
+
+all:
+	make -C $(KPATH) M=$(CURDIR) modules ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
+
+clean:
+	make -C $(KPATH) M=$(CURDIR) clean
+	rm -rf ./doc
+
+doc:
+	doxygen ./Doxyfile
