@@ -29,7 +29,7 @@ Download **linux-headers**:
 $ sudo apt-get install linux-headers-`uname -r`
 ```
 
-Make a kernel module (./src/hello.ko):
+Make a kernel module:
 ```shell
 $ make
 ```
