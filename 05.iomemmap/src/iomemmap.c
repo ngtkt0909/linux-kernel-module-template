@@ -38,7 +38,7 @@ static void sUnregisterDev(void);
 #define D_DEV_NAME		"05.iomemmap"		/**< device name */
 #define D_DEV_MAJOR		(0)					/**< major# */
 #define D_DEV_MINOR		(0)					/**< minor# */
-#define D_DEV_NUM		(3)					/**< number of device */
+#define D_DEV_NUM		(1)					/**< number of device */
 #define D_BUF_SIZE		(32)				/**< buffer size (for sample-code) */
 
 /*------------------------------------------------------------------------------
