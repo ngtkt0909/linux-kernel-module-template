@@ -65,6 +65,29 @@ Make a kernel module:
 $ make -f Makefile.raspberrypi
 ```
 
+### Cross Compiling (for Digilent Board)
+Download and Install [Vivado Design Suite HLx Edition](https://japan.xilinx.com/products/design-tools/vivado.html "link to Xilinx").
+
+Add bellow line to your `.bashrc` in order to add cross-compiler path (change version according to your Vivado):
+``` shell
+export PATH=$PATH:/opt/Xilinx/SDK/2017.1/gnu/arm/lin/bin
+```
+
+Build cross compilation environment.
+```shell
+$ git clone -b master-next https://github.com/DigilentInc/Linux-Digilent-Dev.git
+$ cd Linux-Digilent-Dev
+$ make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- xilinx_zynq_defconfig
+$ make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi-
+```
+
+Change first line of Makefile.digilent (**KPATH**) according to download path on the previous step.
+
+Make a kernel module:
+```shell
+$ make -f Makefile.digilent
+```
+
 ## Usage
 ### 00.hello
 Load the kernel module:
