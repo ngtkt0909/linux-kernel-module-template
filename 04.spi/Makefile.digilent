@@ -1,11 +1,13 @@
-KPATH := /usr/src/linux-headers-`uname -r`
+KPATH := $(HOME)/digilent/Linux-Digilent-Dev
+ARCH := arm
+CROSS_COMPILE := arm-xilinx-linux-gnueabi-
 
 obj-m := ./src/spi_l3gd20.o
 
 .PHONY: all clean doc
 
 all:
-	make -C $(KPATH) M=$(CURDIR) modules
+	make -C $(KPATH) M=$(CURDIR) modules ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
 
 clean:
 	make -C $(KPATH) M=$(CURDIR) clean
