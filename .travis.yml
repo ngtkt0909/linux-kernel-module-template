@@ -11,9 +11,12 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y linux-headers-`uname -r`
 script:
-  - make -C 00.hello   && make -C 00.hello   doc && make -C 00.hello   clean
-  - make -C 01.ktimer  && make -C 01.ktimer  doc && make -C 01.ktimer  clean
-  - make -C 02.hrtimer && make -C 02.hrtimer doc && make -C 02.hrtimer clean
+  - make -C 00.hello    && make -C 00.hello    doc && make -C 00.hello    clean
+  - make -C 01.ktimer   && make -C 01.ktimer   doc && make -C 01.ktimer   clean
+  - make -C 02.hrtimer  && make -C 02.hrtimer  doc && make -C 02.hrtimer  clean
+  - make -C 03.i2c      && make -C 03.i2c      doc && make -C 03.i2c      clean
+  - make -C 04.spi      && make -C 04.spi      doc && make -C 04.spi      clean
+  - make -C 05.iomemmap && make -C 05.iomemmap doc && make -C 05.iomemmap clean
 notifications:
   on_success: never
   on_failure: never
