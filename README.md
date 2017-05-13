@@ -22,6 +22,14 @@ it increments counter every 100ms.
 Timer handler using high-resolution timer is periodically executed, and
 it increments counter every 100ms.
 
+### 03.i2c
+**I2C Client Driver Template**.
+Example of L3GD20 3-axis gyro sensor.
+
+### 04.SPI
+**SPI Client Driver Template**.
+Example of L3GD20 3-axis gyro sensor.
+
 ## Install
 ### Self Compiling (for Ubuntu, etc)
 Download **linux-headers**:
@@ -151,6 +159,33 @@ $ cat /sys/module/hrtimer/parameters/g_counter
 Unload the kernel module:
 ```shell
 $ sudo rmmod hrtimer
+```
+
+### 03.i2c & 04.spi
+Move the kernel module into kernel directory, and update module information:
+```shell
+$ sudo make install
+```
+
+Connect I2C/SPI device and notify it to I2C/SPI core driver:
+```shell
+$ sudo make connect
+```
+
+Can read raw values of 3-axis gyro sensor:
+```shell
+$ sudo make read
+```
+(comma-delimited, X-axis, Y-axis, and Z-axis)
+
+Disconnect I2C/SPI device:
+```shell
+$ sudo make disconnect
+```
+
+Remove the kernel module from the kernel directory, and update module information:
+```shell
+$ sudo make uninstall
 ```
 
 ## License
